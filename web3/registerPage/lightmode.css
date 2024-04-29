@@ -1,0 +1,45 @@
+* {
+	color: rgb(102,102,102);
+}
+body {
+	background-color: rgb(247,247,247);
+	background-image: url('Image/background.jpg');
+	background-position: 50% 0;
+	background-repeat: repeat-x;
+	color: rgb(0,0,0);
+}
+#header {
+	color: rgb(0,0,0);
+}
+#contents {
+	background-color: rgb(255,255,255);
+}
+th {
+	background-color: rgb(245,246,247);
+	color: rgb(102,102,102);
+	border-right: solid 1px rgb(217,217,217);
+	border-bottom: solid 1px rgb(217,217,217);
+}
+td {
+	border-bottom: solid 1px rgb(217,217,217);
+}
+input,
+select,
+textarea {
+	background-color: rgb(255,255,255);
+	border: solid 1px rgb(217,217,217);
+}
+input::placeholder,
+textarea::placeholder {
+	color: rgb(102,102,102);
+}
+input:focus,
+textarea:focus {
+	outline: none;
+}
+.filebox label { 
+	color: #666;
+	background-color: #fdfdfd;
+	border: 1px solid #d9d9d9; 
+	border-bottom-color: #d9d9d9; 
+}

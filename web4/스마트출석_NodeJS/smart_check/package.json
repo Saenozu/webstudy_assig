@@ -1,0 +1,14 @@
+{
+  "name": "smart_check",
+  "version": "1.0.0",
+  "description": "스마트출석",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "21박이슬",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}

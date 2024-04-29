@@ -1,0 +1,167 @@
+<html>
+<head>
+	<title> 방명록 </title>
+	<link rel="shortcut Icon" href="#">
+	<style>
+		* {
+			text-align: center;
+			margin: 0 auto;
+			font-family: 'GmarketSansMedium';
+		}
+		@font-face {
+			font-family: 'GmarketSansMedium';
+			src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+		#header {
+			height: 60px;
+			line-height: 60px;
+			background-color: #043F8C;
+		}
+		#header_title {
+			text-align:center;
+			color: white;
+			font-size: 20px;
+		}
+		#wrap {
+			width: 60%;
+			margin-top: 50px;
+			padding-top: 70px;
+			padding-bottom: 70px;
+			background-image: url('http://localhost:8010/Image/dot_patterns.png');
+		}
+		#contents {
+			width: 75%;
+			background-color: #FFF;
+			border: 1px solid #0879A6;
+		}
+		#contents_title {
+			width: 85%;
+			padding: 10px;
+			padding-top: 40px;
+			display: flex;
+			justify-content: center;
+			border-bottom: 5px solid #043F8C;
+			border-radius: 5px;
+		}
+		#contents_title_square {
+			width: 10px;
+			height: 36px;
+			margin: 0;
+			background-color: #043F8C;
+		}
+		#contents_title_text {
+			margin-left: 10px;
+		}
+		#inputField {
+			width: 85%;
+			padding: 20px 10px 20px 10px;
+			margin-bottom: 20px;
+			border-bottom: 5px solid #043F8C;
+			border-radius: 5px;
+		}
+		input {
+			text-align: left;
+			padding: 5 10px 5 10px;
+		}
+		td {
+			vertical-align: top;
+			padding: 5px 0 5px 0;
+			font-size: 18px;
+		}
+		input[type='text'] {
+			width: 80%;
+			color: #333;
+			border: none;
+			outline: 2px solid #0869A6;
+		}
+		input[type='text']:focus {
+			outline: 2px solid #F2AC29;
+		}
+		textarea {
+			width: 80%;
+			padding: 5 10px 5 10px;
+			text-align: left;
+			color: #333;
+			resize: none;
+			border: none;
+			outline: 2px solid #0869A6;
+		}
+		textarea:focus {
+			outline: 2px solid #F2AC29;
+		}
+		#inputField_submit {
+			text-align: center;
+			width: 100px;
+			height: 30px;
+			color: #0869A6;
+			border: 2px solid #0869A6;
+		}
+		#outputField {
+			width: 85%;
+			padding: 10px 0 30px 0;
+		}
+		.outputField_box {
+			width: 100%;
+			color: #666;
+			border: 1px solid #d9d9d9;
+			padding: 10px;
+			margin-bottom: 10px;
+			text-align: left;
+		}
+		.output_content {
+			text-align: left;
+			margin-top: 8px;
+			font-size: 14px;
+		}
+		.output_name, .output_nick, .output_date, .output_modify, .output_delete {
+			text-decoration: none;
+			color: #0869A6;
+			font-size: 14px;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+		<p id="header_title">2022 CAT-Security</p>
+	</div>
+	<div id='wrap'>
+		<div id='contents'>
+			<div id='contents_title'>
+				<div id='contents_title_square'></div>
+				<h1 id='contents_title_text'> 방명록 </h1>
+			</div>
+			<div id='inputField'>
+				<table width='80%'>
+					<form method='post' action=''>
+						<tr><td>이&ensp;&ensp;름:</td><td><input type='text' name='inputName' maxlength='20' value="<% if(form){ %><%= form[0].name %><% } %>"/></td></tr>
+						<tr><td>닉네임:</td><td><input type='text' name='inputNick' maxlength='20' value="<% if(form){ %><%= form[0].nick %><% } %>"/></td></tr>
+						<tr><td>내&ensp;&ensp;용:</td><td><textarea name='inputText' cols='30' rows='5' maxlength='255'><% if(form){ %><%= form[0].content %><% } %></textarea></td></tr>
+						<tr><td colspan="2" style="vertical-align: middle;"><input id="inputField_submit" type='submit' name='submit' value='제출'/></td></tr>
+					</form>
+				</table>
+			</div>
+			<div id='outputField'>
+				<% if (list) { %>
+				
+				<script>
+					const outputField = document.getElementById('outputField');
+					const outputBox = document.getElementsByClassName('outputField_box');
+					<% for (var i of list) { %>
+						outputField.innerHTML = "<div class='outputField_box'></div>" + outputField.innerHTML;
+						outputBox[0].innerHTML += "<span class='output_name'><%= i.name %></span>";
+						outputBox[0].innerHTML += "<span class='output_nick'>(<%= i.nick %>) </span>";
+						outputBox[0].innerHTML += "<span class='output_date'>| <%= i.date %> |</span>";
+						outputBox[0].innerHTML += "<a href='/modify/<%= i.no %>' class='output_modify' role='button'> 수정 |</a>";
+						outputBox[0].innerHTML += "<a href='/delete/<%= i.no %>' class='output_delete' role='button'> 삭제</a>";
+						outputBox[0].innerHTML += "<p class='output_content'><%= i.content %></p>";
+					<% } %>
+				</script>
+				
+				<% } %>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

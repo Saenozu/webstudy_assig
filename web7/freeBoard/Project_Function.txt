@@ -1,0 +1,107 @@
+-회원가입 (OK)
+-로그인 & 로그아웃 (OK)
+-탈퇴(OK)
+-글쓰기(OK)
+-글수정(OK)
+-글삭제(OK)
+-글목록(로그인 시에만 보이게)(OK)
+-글보기(OK)
+-페이징(OK)
+-비밀글(OK)
+-글검색(OK)
+-회원정보조회 & 수정(OK)
+-모든 글에는 파일 업로드, 다운로드(OK)
+-댓글(쓰기,삭제,수정, 댓글 수 표시,비밀 댓글)(OK)
+-답글(쓰기,삭제,수정,비밀글, 댓글의 답글)(OK)
+-조회수(새로고침 해도 안올라가게)(OK)
+-좋아요 & 싫어요(OK)
+
+-비밀번호찾기
+
+
+SELECT * FROM FreeBoard_Post WHERE title LIKE '%테라리아%' OR content LIKE '%테라리아%' OR user LIKE '%테라리아%' ORDER BY no DESC
+SELECT * FROM FreeBoard_Post WHERE content LIKE '%테라리아%' ORDER BY no DESC
+
+create table FreeBoard_Account( 
+    no INT(11) AUTO_INCREMENT PRIMARY KEY, 
+    id VARCHAR(15) NOT NULL, 
+    password VARCHAR(20) NOT NULL,
+    name VARCHAR(30) NOT NULL,
+    email VARCHAR(320) NOT NULL
+);
+CREATE TABLE FreeBoard_Post(
+    no INT(11) AUTO_INCREMENT PRIMARY KEY,
+    user VARCHAR(30) NOT NULL,
+    pw VARCHAR(20),
+    title VARCHAR(100) NOT NULL,
+    content VARCHAR(4500) NOT NULL,
+    file varchar(260),
+    date datetime not null,
+    hit INT(5) DEFAULT 0,
+    up INT(5) DEFAULT 0,
+    down INT(5) DEFAULT 0,
+    lock_flag INT(1) DEFAULT 0
+);
+CREATE TABLE FreeBoard_Reply(
+    r_no INT(11) AUTO_INCREMENT PRIMARY KEY,
+    con_no INT(11) NOT NULL,
+    r_group INT(11) NOT NULL,
+    r_class INT(3) NOT NULL,
+    r_user VARCHAR(30) NOT NULL,
+    r_content VARCHAR(4500) NOT NULL,
+    r_date datetime NOT NULL,
+    r_lock_flag INT(1) NOT NULL DEFAULT 0
+);
+CREATE TABLE FreeBoard_Likes(
+    no INT(11) AUTO_INCREMENT PRIMARY KEY,
+    con_no INT(11) NOT NULL,
+    uid VARCHAR(30) NOT NULL,
+    type CHAR(1) NOT NULL
+);
+
+ALTER TABLE FreeBoard_Reply MODIFY r_lock_flag INT(1) NOT NULL DEFAULT 0;
+
+INSERT INTO FreeBoard_Post(user,title,content,lock_flag) VALUES("admin","test2","test2",0);
+
+update FreeBoard_Post set user="21박이슬" where no=3;
+
+ALTER TABLE FreeBoard_Post ADD file varchar(260) AFTER content;
+
+ALTER TABLE FreeBoard_Reply MODIFY con_no INT(11) NOT NULL;
+
+ALTER TABLE FreeBoard_Reply MODIFY r_group INT(11) NOT NULL;
+
+ALTER TABLE FreeBoard_Reply MODIFY r_class INT(3) NOT NULL;
+
+SELECT * FROM FreeBoard_Reply WHERE con_no=10 ORDER BY r_group;
+
+ALTER TABLE FreeBoard_Likes ADD type CHAR(1) NOT NULL;
+
+UPDATE FreeBoard_Post SET up=0 WHERE no=11;
+
+SELECT * FROM FreeBoard_Likes WHERE user_id='admin' and type='U' and con_no=11;
+
+ALTER TABLE FreeBoard_Post ADD depth INT(3) DEFAULT 0 AFTER date;
+
+ALTER TABLE FreeBoard_Post MODIFY depth INT(3) DEFAULT 0 NOT NULL;
+
+ALTER TABLE FreeBoard_Post ADD re_no INT(11) DEFAULT 0 NOT NULL AFTER depth;
+
+SELECT no, title, depth, re_no FROM FreeBoard_Post ORDER BY re_no DESC, depth ASC;
+
+UPDATE FreeBoard_Post SET depth=depth+1, re_no=7 ORDER BY no DESC LIMIT 1;
+
+SELECT no, title, depth, re_no FROM FreeBoard_Post ORDER BY re_no DESC, no ASC, depth ASC;
+
+UPDATE FreeBoard_Post SET user='---' where user not in ( select name from FreeBoard_Account );
+
+CREATE TABLE FreeBoard_Try (
+    IP VARCHAR(15) NOT NULL,
+    TIME TIMESTAMP,
+    TRY INT DEFAULT 0,
+    PRIMARY KEY(IP)
+);
+
+update test set TIME=DATE_ADD(NOW(), INTERVAL 15 MINUTE), TRY=0 WHERE IP='ip';
+
+update test set TRY=TRY+1 WHERE IP='ip';

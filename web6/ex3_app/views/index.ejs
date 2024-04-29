@@ -1,0 +1,48 @@
+<html>
+<head>
+	<title>CAT-Security Node.js & MySQL</title>
+	<style>
+		table {
+			width: 100%;
+			text-align: center;
+			border-collapse: collapse;
+			border-top: 2px solid #ed0606;
+		}
+		th,
+		td {
+			border-bottom: 1px dashed #001763;
+		}
+	</style>
+</head>
+<body>
+	<h2>CAT-Security Node.js & MySQL</h2>
+	<div>
+		<table>
+			<thread>
+				<th> 이름 </th>
+				<th> 학교 </th>
+				<th> 전공 </th>
+				<th> 성별 </th>
+				<th> 입학년도 </th>
+				<th> 이메일 </th>
+				<th> 전화번호 </th>
+				<th> 생일 </th>
+				<th> 학년 </th>
+				<th> 학점 </th>
+			</thread>
+			<tbody> <% for(var i of list) { %> <tr>
+				<td> <%= i.Name %> </td>
+				<td> <%= i.School %> </td>
+				<td> <%= i.Major %> </td>
+				<td> <%= i.Gender %> </td>
+				<td> <%= i.EnterYear %> </td>
+				<td> <%= i.Email %> </td>
+				<td> <%= i.Phone %> </td>
+				<td> <%= i.Birth %> </td>
+				<td> <%= i.Grade %> </td>
+				<td> <%= i.Score %> </td>
+			</tr> <% } %> </tbody>
+		</table>
+	</div>
+</body>
+</html>

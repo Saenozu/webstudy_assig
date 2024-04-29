@@ -1,0 +1,268 @@
+<html lang='ko'>
+    <head>
+	<meta charset='UTF-8'>
+        <title>
+            회원가입
+        </title>
+        <style>
+            * {
+                font-size: 12px;
+                font-family: 맑은고딕;
+            }
+            #header,
+            #footer {
+                width: 500px;
+                padding-bottom: 6px;
+                font-weight: bold;
+                font-size: 18px;
+            }
+            #contents {
+                width: 600px
+            }
+            table {
+                border-top: solid 2px #666;
+                border-bottom: solid 2px #666;
+                border-spacing: 0;
+            }
+            th {
+                width: 150px;
+            }
+            td {
+                height: 45px;
+                padding: 10px;
+            }
+            input,
+            textarea,
+            select {
+                cursor: pointer;
+                padding: 6px;
+            }
+            input {
+                width: 180px;
+                height: 30px;
+                margin: 0;
+            }
+            div {
+                margin: 0 auto;
+            }
+            label {
+                margin: 0 4px 0 0;
+                line-height: 15px;
+                vertical-align: top;
+            }
+            .agree {
+                margin: 0;
+                padding: 2px 0 0;
+            }
+            .iBirth {
+                width: 60px;
+                height: 30px;
+                margin: 0 0 0 10px;
+            }
+            .iQuest {
+                width: 180px;
+                height: 30px;
+                margin: 0 0 0 10px;
+            }
+            .iEmail {
+                width: 100px;
+                height: 30px;
+            }
+			input[type=radio],[type=checkbox] {
+				width: 15px;
+				height:15px;
+			}
+            input[type=submit] {
+                width: 100px;
+                background-color: #3c3c3c;
+                color: #fff;
+                font-size: 12px;
+            }
+            #switch {
+                display: none;
+            }
+            #switch+label {
+                display: inline-block;
+                width: 32px;
+                height: 32px;
+                margin-left: 360px;
+                background: url('Image/switch(off).png') no-repeat 0 0 / contain;
+            }
+            #switch:checked+label {
+                background: url('Image/switch(on).png') no-repeat 0 0 / contain;
+            }
+            .filebox label {
+                display: inline-block;
+                padding: 5px 7.5px;
+                font-size: inherit;
+                line-height: normal;
+                vertical-align: middle;
+                cursor: pointer;
+                border-radius: 2.5px;
+            }
+            .filebox input[type="file"] {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                border: 0;
+            }
+        </style>
+        <link id="mode" rel="stylesheet" type="text/css" href="lightmode.css">
+    </head>
+    <body>
+        <div id="contents">
+            <div style="height:50px"></div>
+            <div id="header">
+                ▶ 회원가입
+                <input id="switch" type="checkbox" onclick="changeMode(event)"/><label id="switch_l" for="switch"></label>
+            </div>
+            <form method="post" action="./registInfo.php" enctype="multipart/form-data" name="registForm">
+                <table width="500px" align="center" name="registTable">
+                    <tr>
+                        <th> 아이디* </th>
+                        <td>
+                            <input type="text" name="iID" placeholder="아이디"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> 비밀번호* </th>
+                        <td>
+                            <input type="password" name="iPass" placeholder="비밀번호"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> 비밀번호 확인* </th>
+                        <td>
+                            <input type="password" name="iPass_ck" placeholder="비밀번호 확인"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> 이름* </th>
+                        <td> <input type="text" name="iName" placeholder="이름"/> </td>
+                    </tr>
+                    <tr>
+                        <th> 성별 </th>
+                        <td>
+                            <input id="gen01" type="radio" name="iGender" value="m"/>
+                            <label for="gen01">
+                                남성
+                            </label>
+                            <input id="gen02" type="radio" name="iGender" value="f"/>
+                            <label for="gen02">
+                                여성
+                            </label>
+                            <div class="agree">
+                                <input id="genAgree" type="checkbox" name="genAgree" value="Y"/>
+                                <label for="genAgree">선택정보(성별) 수집 및 이용 동의</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> 별명 </th>
+                        <td>
+                            <input type="text" name="iNick" placeholder="별명"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> 생년월일* </th>
+                        <td style="padding-left:0">
+                            <input class="iBirth" type="text" name="iYear" placeholder="년 (4자)" maxlength="4"/> 년
+                            <select class="iBirth" name="iMonth">
+                                <option value="none" selected> -월- </option>
+                                <option value="1"> 01 </option>
+                                <option value="2"> 02 </option>
+                                <option value="3"> 03 </option>
+                                <option value="4"> 04 </option>
+                                <option value="5"> 05 </option>
+                                <option value="6"> 06 </option>
+                                <option value="7"> 07 </option>
+                                <option value="8"> 08 </option>
+                                <option value="9"> 09 </option>
+                                <option value="10"> 10 </option>
+                                <option value="11"> 11 </option>
+                                <option value="12"> 12 </option>
+                            </select> 월
+                            <input class="iBirth" type="text" name="iDay" placeholder="일" maxlength="2"/> 일
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> 이메일* </th>
+                        <td>
+                            <input class="iEmail" type="text" name="iEmail_h" placeholder="sample"/>
+                            @
+                            <input class="iEmail" type="text" name="iEmail_t" placeholder="email.com"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> 휴대전화 </th>
+                        <td>
+                            <input type="text" name="iTel" placeholder="휴대전화 ( - 제외 )"/>
+                            <br>
+                            <div class="agree">
+                                <input id="telAgree" type="checkbox" name="telAgree" value="Y"/>
+                                <label for="telAgree">선택정보(전화번호) 수집 및 이용 동의</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> 소개 </th>
+                        <td>
+                            <textarea rows="3" cols="50" name="iIntro" placeholder="간단한 소개(72자)" maxlength="70" style="resize: none"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> 프로필 사진 </th>
+                        <td>
+                            <div class="filebox">
+                                <label for="inputFile">업로드</label>
+                                <input id="inputFile" type="file" name='iProfile'/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th> 본인확인 질문* </th>
+                        <td style="padding-left:0">
+                            <select class="iQuest" name="iQuest">
+                                <option value="none" selected>
+                                    -본인확인 질문-
+                                </option>
+                                <option value="가장 좋아하는 색깔은?">가장 좋아하는 색깔은?</option>
+                                <option value="가장 좋아하는 영화는?">가장 좋아하는 영화는?</option>
+                                <option value="가장 좋아하는 음식은?">가장 좋아하는 음식은?</option>
+                                <option value="가장 좋아하는 유명인은?">가장 좋아하는 유명인은?</option>
+                                <option value="가장 좋아하는 게임은?">가장 좋아하는 게임은?</option>
+                                <option value="가장 좋아하는 책은?">가장 좋아하는 책은?</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="border-bottom: none">
+                            본인확인 질문 답변*
+                        </th>
+                        <td style="border-bottom: none">
+                            <input type="text" name="iReply" placeholder="본인확인 질문 답변"/>
+                        </td>
+                    </tr>
+                </table>
+                <div style="height:20px"></div>
+                <div id="footer" align="center">
+                    <input type="submit" name="submit" value="확인"/>
+                </div>
+            </form>
+        </div>
+    </body>
+    <script>
+        function changeMode(event) {
+            var link_css = document.getElementById("mode");
+            if (event.target.checked) {
+                link_css.href = ('./darkmode.css');
+            } else {
+                link_css.href = ('./lightmode.css');
+            }
+        }
+    </script>
+</html>
